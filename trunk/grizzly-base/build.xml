@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="grizzly-base" default="build-jar">
+	<property name="bin" value="bin"/>
+	<property name="dist" value="dist"/>
+	<property name="src" value="src"/>
+	<property name="jar-file" value="${dist}/grizzly-base-lib.jar"/>
+	
+	<target name="init" depends="clean">
+		<mkdir dir="${bin}"/>
+		<mkdir dir="${dist}"/>
+	</target>
+	<target name="clean">
+		<delete dir="${bin}"/>
+		<delete dir="${dist}"/>
+	</target>
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${bin}"/>
+	</target>
+	<target name="build-jar" depends="compile">
+		<jar destfile="${jar-file}" basedir="${bin}"/>
+	</target>
+</project>
