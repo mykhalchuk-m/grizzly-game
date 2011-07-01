@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="grizzly-tenis" default="build-jar">
+	<property name="bin" value="bin"/>
+	<property name="dist" value="dist"/>
+	<property name="src" value="src"/>
+	<property name="libs" value="libs"/>
+	<property name="jar-file" value="${dist}/grizzly-tenis-lib.jar"/>
+	
+	<target name="init" depends="clean">
+		<mkdir dir="${bin}"/>
+		<mkdir dir="${dist}"/>
+		<copy todir="${libs}">
+			<fileset dir="${basedir}/../grizzly-base/dist"/>
+		</copy>
+	</target>
+	<target name="clean">
+		<delete dir="${bin}"/>
+		<delete dir="${dist}"/>
+	</target>
+	<path id="libs">
+		<fileset dir="${libs}" includes="*.jar"/>
+	</path>
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${bin}" classpathref="libs"/>
+	</target>
+	<target name="build-jar" depends="compile">
+		<jar destfile="${jar-file}" basedir="${bin}"/>
+	</target>
+</project>
