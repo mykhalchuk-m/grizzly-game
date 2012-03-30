@@ -1,5 +1,16 @@
 package com.game.grizzly.core.skills.serves;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum ServeType {
-	CURVE_TO_LEFT, CURVE_TO_RIGHT;
+	SERVE_CURVE_TO_LEFT, SERVE_CURVE_TO_RIGHT;
+	
+	public static List<String> getStringValues() {
+		List<String> list = new ArrayList<String>();
+		for (ServeType defenceType : values()) {
+			list.add(defenceType.toString());
+		}
+		return list;
+	}
 }

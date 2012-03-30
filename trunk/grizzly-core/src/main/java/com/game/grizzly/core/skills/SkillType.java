@@ -9,7 +9,7 @@ public enum SkillType {
 	ACCEPTENCE_SERVE_CURVED_TO_RIGHT, SERVE_CURVE_TO_LEFT, SERVE_CURVE_TO_RIGHT, 
 	STRIKE_SMASH, STRIKE_CURVED;
 	
-	public List<SkillType> getSubskills(SkillGroupType groupType) {
+	public static List<SkillType> getSubskills(SkillGroupType groupType) {
 		List<SkillType> skillTypes = new ArrayList<SkillType>();
 		for (SkillType skillType : values()) {
 			if (skillType.toString().startsWith(groupType.toString())) {
