@@ -1,23 +1,29 @@
 package com.game.grizzly.core.skills.passive;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.game.grizzly.core.skills.AbstractSkillFactory;
 
-public class PasiveSkillFactory extends AbstractSkillFactory<PasiveSkill, PasiveSkillType> {
+public class PasiveSkillFactory extends AbstractSkillFactory {
 
-	private static Map<PasiveSkillType, PasiveSkill> pasiveSkills = new HashMap<PasiveSkillType, PasiveSkill>();
-	
-	static {
-		pasiveSkills.put(PasiveSkillType.STAMINA, new Stamian());
+	private Map<PasiveSkillType, PasiveSkill> pasiveSkills = new HashMap<PasiveSkillType, PasiveSkill>();
+
+	public PasiveSkillFactory() {
+		pasiveSkills.put(PasiveSkillType.PASIVE_STAMINA, new Stamian());
 	}
-	
+
 	@Override
-	public PasiveSkill getSkill(PasiveSkillType e, double value) {
-		PasiveSkill pasiveSkill = pasiveSkills.get(e);
-		pasiveSkill.setValue(value);
+	public PasiveSkill getSkill(String key) {
+		PasiveSkill pasiveSkill = pasiveSkills
+				.get(PasiveSkillType.valueOf(key));
 		return pasiveSkill;
+	}
+
+	@Override
+	public List<String> getSkillTypes() {
+		return PasiveSkillType.getStringValues();
 	}
 
 }

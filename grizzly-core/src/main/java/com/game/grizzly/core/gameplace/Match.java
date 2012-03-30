@@ -1,6 +1,9 @@
 package com.game.grizzly.core.gameplace;
 
 import java.util.List;
+import java.util.Random;
+
+import com.game.grizzly.core.skills.SkillType;
 
 public class Match {
 	private List<Player> players;
@@ -8,8 +11,12 @@ public class Match {
 	private Score score;
 	
 	public void playMatch() {
-		score = new Score();
-		System.out.println("play match..");
+		Random random = new Random();
+		if (random.nextDouble() > players.get(0).getSkillValue(SkillType.PASIVE_STAMINA)) {
+			score.incSrore(1);
+		} else {
+			
+		}
 	}
 	
 	public List<Player> getPlayers() {

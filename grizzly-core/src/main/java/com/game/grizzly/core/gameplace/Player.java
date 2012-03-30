@@ -1,16 +1,14 @@
 package com.game.grizzly.core.gameplace;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.game.grizzly.core.skills.Skill;
-import com.game.grizzly.core.skills.SkillGroupType;
 import com.game.grizzly.core.skills.SkillType;
 
 public class Player {
 	private String name;
-	private Map<SkillGroupType, Map<SkillType, Skill>> map;
-	private List<Skill> skills;
+	private Map<SkillType, Skill> skills = new HashMap<SkillType, Skill>();
 
 	public String getName() {
 		return name;
@@ -20,24 +18,27 @@ public class Player {
 		this.name = name;
 	}
 
-	public List<Skill> getSkills() {
+	public Map<SkillType, Skill> getSkills() {
 		return skills;
 	}
 
-	public void setSkills(List<Skill> skills) {
+	public void setSkills(Map<SkillType, Skill> skills) {
 		this.skills = skills;
 	}
 
-	public Map<SkillGroupType, Map<SkillType, Skill>> getMap() {
-		return map;
+	public double getSkillValue(SkillType skillType) {
+		return skills.get(skillType).doAction();
 	}
-
-	public void setMap(Map<SkillGroupType, Map<SkillType, Skill>> map) {
-		this.map = map;
+	
+	public void setSkill(SkillType skillType, double value) {
+		Skill skill = skills.get(skillType);
+		skill.setValue(value);
+		skills.put(skillType, skill);
 	}
 	
 	@Override
 	public String toString() {
 		return "Player [name=" + name + ", skills=" + skills + "]";
 	}
+
 }

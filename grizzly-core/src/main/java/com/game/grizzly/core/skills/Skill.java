@@ -13,6 +13,6 @@ public class Skill {
 	
 	@Override
 	public String toString() {
-		return "[" + getClass().getName() + " -> " + value + "]";
+		return "[" + getClass().getName() + " -> " + value + "]\n";
 	}
 }

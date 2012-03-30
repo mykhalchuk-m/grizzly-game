@@ -1,24 +1,29 @@
 package com.game.grizzly.core.skills.defence;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.game.grizzly.core.skills.AbstractSkillFactory;
 
-public class DefenceFactory extends AbstractSkillFactory<Defence, DefenceType> {
+public class DefenceFactory extends AbstractSkillFactory {
 
-	private static Map<DefenceType, Defence> defences = new HashMap<DefenceType, Defence>();
+	private Map<DefenceType, Defence> defences = new HashMap<DefenceType, Defence>();
 
-	static {
-		defences.put(DefenceType.CURVED, new CurvedDefence());
-		defences.put(DefenceType.SMASH, new SmashDefence());
+	public DefenceFactory() {
+		defences.put(DefenceType.DEFENCE_CURVED, new CurvedDefence());
+		defences.put(DefenceType.DEFENCE_SMASH, new SmashDefence());
 	}
 
 	@Override
-	public Defence getSkill(DefenceType e, double value) {
-		Defence defence = defences.get(e);
-		defence.setValue(value);
+	public Defence getSkill(String key) {
+		Defence defence = defences.get(DefenceType.valueOf(key));
 		return defence;
+	}
+
+	@Override
+	public List<String> getSkillTypes() {
+		return DefenceType.getStringValues();
 	}
 
 }
