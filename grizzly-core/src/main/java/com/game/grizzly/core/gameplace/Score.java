@@ -20,4 +20,9 @@ public class Score {
 	public void incSrore(int player) {
 		score.set(player, score.get(player) + 1);
 	}
+	
+	@Override
+	public String toString() {
+		return score.toString();
+	}
 }
