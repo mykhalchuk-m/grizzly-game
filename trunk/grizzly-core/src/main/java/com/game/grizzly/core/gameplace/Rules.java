@@ -6,12 +6,12 @@ public class Rules {
 	private int maxScore;
 	private int servesPerSet;
 
-	public boolean isFinish(Score score) {
-		for (Integer count : score.getScore()) {
+	public boolean isFinish(int... scores) {
+		for (Integer count : scores) {
 			if (count >= maxScore) {
-				Integer[] scores = score.getScore().toArray(new Integer[0]);
-				Arrays.sort(scores);
-				if ((scores[0] - scores[1]) > 1) {
+				int[] temp = scores.clone();
+				Arrays.sort(temp);
+				if ((temp[1] - temp[0]) > 1) {
 					return true;
 				}
 			}

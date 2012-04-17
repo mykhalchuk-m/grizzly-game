@@ -15,9 +15,8 @@ public class ServeAcceptanceFactory {
 				new AcceptCurvedToRightServe());
 	}
 
-	public Skill getSkill(String key) {
-		Skill serveAcceptance = serveAcceptences.get(ServeAcceptenceType
-				.valueOf(key));
+	public Skill getSkill(ServeAcceptenceType key) {
+		Skill serveAcceptance = serveAcceptences.get(key);
 		return serveAcceptance;
 	}
 }

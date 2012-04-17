@@ -11,5 +11,10 @@ public abstract class AbstractSkill implements Skill {
 	public int doAction() {
 		return value;
 	}
+	
+	@Override
+	public String toString() {
+		return "[" + getClass() + " -> " + value + "]";
+	}
 
 }
