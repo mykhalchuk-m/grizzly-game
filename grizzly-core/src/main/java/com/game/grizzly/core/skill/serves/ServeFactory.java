@@ -9,12 +9,12 @@ public class ServeFactory {
 	private static Map<ServeType, Skill> serves = new HashMap<ServeType, Skill>();
 	
 	public ServeFactory() {
-		serves.put(ServeType.CURVE_TO_LEFT, new CurvedToLeftServe());
-		serves.put(ServeType.CURVE_TO_RIGHT, new CurvedToRightServe());
+		serves.put(ServeType.CURVED_TO_LEFT, new CurvedToLeftServe());
+		serves.put(ServeType.CURVED_TO_RIGHT, new CurvedToRightServe());
 	}
 	
-	public Skill getSkill(String key) {
-		Skill serve = serves.get(ServeType.valueOf(key));
+	public Skill getSkill(ServeType key) {
+		Skill serve = serves.get(key);
 		return serve;
 	}
 

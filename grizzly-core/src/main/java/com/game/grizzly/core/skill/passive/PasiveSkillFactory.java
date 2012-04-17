@@ -16,9 +16,8 @@ public class PasiveSkillFactory {
 		pasiveSkills.put(PasiveSkillType.REGENERATION, new Regeneration());
 	}
 
-	public Skill getSkill(String key) {
-		Skill pasiveSkill = pasiveSkills
-				.get(PasiveSkillType.valueOf(key));
+	public Skill getSkill(PasiveSkillType key) {
+		Skill pasiveSkill = pasiveSkills.get(key);
 		return pasiveSkill;
 	}
 
