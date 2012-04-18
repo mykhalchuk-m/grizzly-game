@@ -14,7 +14,6 @@ public class DefenceFactory {
 	}
 	
 	public Skill getSkill(DefenceType key) {
-		Skill strike = defences.get(key);
-		return strike;
+		return defences.get(key);
 	}
 }

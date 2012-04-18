@@ -1,7 +1,7 @@
 package com.game.grizzly.core.skill;
 
 public interface Skill {
-	int doAction();
+	double doAction();
 	
-	void setSkillValue(int value);
+	void setSkillValue(double value);
 }

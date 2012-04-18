@@ -24,7 +24,7 @@ public class SkillsGenerator {
 		Map<ServeType, Skill> map = new HashMap<ServeType, Skill>();
 		for (ServeType serveType : ServeType.values()) {
 			Skill skill = serveFactory.getSkill(serveType);
-			skill.setSkillValue(20 + random.nextInt(10));
+			skill.setSkillValue(random.nextDouble());
 			map.put(serveType, skill);
 		}
 		player.setServes(map);
@@ -36,7 +36,7 @@ public class SkillsGenerator {
 		Map<ServeAcceptenceType, Skill> map = new HashMap<ServeAcceptenceType, Skill>();
 		for (ServeAcceptenceType acceptenceType : ServeAcceptenceType.values()) {
 			Skill skill = acceptanceFactory.getSkill(acceptenceType);
-			skill.setSkillValue(20 + random.nextInt(10));
+			skill.setSkillValue(random.nextDouble());
 			map.put(acceptenceType, skill);
 		}
 		player.setServesAcceptence(map);
@@ -47,10 +47,10 @@ public class SkillsGenerator {
 		PasiveSkillFactory pasiveSkillFactory = new PasiveSkillFactory();
 		Map<PasiveSkillType, Skill> map = new HashMap<PasiveSkillType, Skill>();
 		Skill skill = pasiveSkillFactory.getSkill(PasiveSkillType.STAMINA);
-		skill.setSkillValue(90);
+		skill.setSkillValue(0.9);
 		map.put(PasiveSkillType.STAMINA, skill);
 		skill = pasiveSkillFactory.getSkill(PasiveSkillType.CRYTICAL_STRICE);
-		skill.setSkillValue(7);
+		skill.setSkillValue(0.07);
 		map.put(PasiveSkillType.CRYTICAL_STRICE, skill);
 		player.setPasives(map);
 		return player;
@@ -61,7 +61,7 @@ public class SkillsGenerator {
 		Map<StrikeType, Skill> map = new HashMap<StrikeType, Skill>();
 		for (StrikeType key : StrikeType.values()) {
 			Skill skill = strikeFactory.getSkill(key);
-			skill.setSkillValue(20 + random.nextInt(10));
+			skill.setSkillValue(random.nextDouble());
 			map.put(key, skill);
 		}
 		player.setStrikes(map);
@@ -73,7 +73,7 @@ public class SkillsGenerator {
 		Map<DefenceType, Skill> map = new HashMap<DefenceType, Skill>();
 		for (DefenceType defenceType : DefenceType.values()) {
 			Skill skill = defenceFactory.getSkill(defenceType);
-			skill.setSkillValue(20 + random.nextInt(10));
+			skill.setSkillValue(random.nextDouble());
 			map.put(defenceType, skill);
 		}
 		player.setDefences(map);

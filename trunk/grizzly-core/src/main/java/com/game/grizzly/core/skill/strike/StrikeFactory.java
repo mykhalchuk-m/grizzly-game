@@ -14,7 +14,6 @@ public class StrikeFactory {
 	}
 	
 	public Skill getSkill(StrikeType key) {
-		Skill strike = strikes.get(key);
-		return strike;
+		return strikes.get(key);
 	}
 }

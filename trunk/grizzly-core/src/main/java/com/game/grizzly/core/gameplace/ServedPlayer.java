@@ -21,12 +21,13 @@ public class ServedPlayer {
 		return ServeType.values()[random.nextInt(ServeType.values().length)];
 	}
 
-	public int getServe(ServeType serveType) {
-		if (random.nextInt(100) > player.getPasives()
-				.get(PasiveSkillType.STAMINA).doAction()) {
+	/**
+	 * return 0 means that served player fell on his serve. This value affect
+	 * success of serve.
+	 */
+	public double getServe(ServeType serveType) {
+		if (random.nextDouble() > player.getPasives().get(PasiveSkillType.STAMINA).doAction()) {
 			logger.info("Serve fall!!!");
-			// return 0 means that served player fell on his serve. This value
-			// affect success of serve.
 			return 0;
 		}
 		return player.getServe(serveType).doAction();

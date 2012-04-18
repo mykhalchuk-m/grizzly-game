@@ -17,8 +17,7 @@ public class PasiveSkillFactory {
 	}
 
 	public Skill getSkill(PasiveSkillType key) {
-		Skill pasiveSkill = pasiveSkills.get(key);
-		return pasiveSkill;
+		return pasiveSkills.get(key);
 	}
 
 }

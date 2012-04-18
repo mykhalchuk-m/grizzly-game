@@ -9,70 +9,72 @@ import com.game.grizzly.core.skill.strike.StrikeType;
 
 public class Match {
 	private Logger logger = Logger.getLogger(getClass());
+	private static final int MAX_SCORE = 11;
+	private static final int SERVES_PER_SET = 2;
+	private static final int PUNKTS_PER_GOAL = 1;
 
 	private List<Player> players;
-	private MatchState matchState;
 	private Rules rules;
 
 	private ServedPlayer servedPlayer;
 	private AcceptencePlayer acceptencePlayer;
 
-	private StrikesPlayer strikePlayer;
+	private StrikePlayer strikePlayer;
 	private DefencePlayer defencePlayer;
 
 	private void initMatch() {
+		logger.info("Before initialization.");
 		servedPlayer = new ServedPlayer(players.get(0));
 		acceptencePlayer = new AcceptencePlayer(players.get(1));
 		rules = new Rules();
-		rules.setMaxScore(11);
-		rules.setServesPerSet(2);
+		rules.setMaxScore(MAX_SCORE);
+		rules.setServesPerSet(SERVES_PER_SET);
+		logger.info("Match initialized.");
 	}
 
 	public void playMatch() {
-		logger.info("Before initialization.");
-		initMatch();
-		logger.info("Match initialized.");
-		while (!rules.isFinish(servedPlayer.getPlayer().getScore(), acceptencePlayer.getPlayer().getScore())) {
+		for (initMatch(); !rules.isFinish(servedPlayer.getPlayer().getScore(), acceptencePlayer.getPlayer().getScore()); swapServes()) {
+			
 			logger.info("Set started. Set has " + rules.getServesPerSet() + " serves.");
 
 			for (int i = 0; i < rules.getServesPerSet()
-					&& !rules.isFinish(servedPlayer.getPlayer().getScore(), acceptencePlayer.getPlayer().getScore()); i++, swapServes()) {
+					&& !rules.isFinish(servedPlayer.getPlayer().getScore(), acceptencePlayer.getPlayer().getScore()); i++) {
 				ServeType serveType = servedPlayer.getServeType();
-				int serveValue = servedPlayer.getServe(serveType);
+				double serveValue = servedPlayer.getServe(serveType);
+
 				if (serveValue == 0) {
-					acceptencePlayer.getPlayer().incScore(1);
-					logger.info("Score: " + servedPlayer.getPlayer().getScore() + " : "
-							+ acceptencePlayer.getPlayer().getScore());
-					break;
+					acceptencePlayer.getPlayer().incScore(PUNKTS_PER_GOAL);
+					logScore(servedPlayer.getPlayer(), acceptencePlayer.getPlayer());
+					continue;
 				}
+
 				logger.info("Choused serve: " + serveType);
 
 				if (!acceptencePlayer.canServeAcceptence(serveValue, serveType)) {
-					servedPlayer.getPlayer().incScore(1);
+					servedPlayer.getPlayer().incScore(PUNKTS_PER_GOAL);
 				} else {
 					logger.info("--------- game ---------");
-					
-					strikePlayer = new StrikesPlayer(acceptencePlayer.getPlayer());
+
+					strikePlayer = new StrikePlayer(acceptencePlayer.getPlayer());
 					defencePlayer = new DefencePlayer(servedPlayer.getPlayer());
-					
+
 					for (boolean goal = false; !goal; swapStrikers()) {
 						StrikeType strikeType = strikePlayer.getStrikeType();
 						logger.info("Choused strike: " + strikeType);
 						if (!defencePlayer.canDefence(strikePlayer.getStrike(strikeType), strikeType)) {
 							goal = true;
-							strikePlayer.getPlayer().incScore(1);
+							strikePlayer.getPlayer().incScore(PUNKTS_PER_GOAL);
 						}
 					}
 				}
-				logger.info("Score: " + servedPlayer.getPlayer().getScore() + " : "
-						+ acceptencePlayer.getPlayer().getScore());
+				logScore(servedPlayer.getPlayer(), acceptencePlayer.getPlayer());
 			}
 		}
 	}
 
 	private void swapStrikers() {
 		Player temp = strikePlayer.getPlayer();
-		strikePlayer = new StrikesPlayer(defencePlayer.getPlayer());
+		strikePlayer = new StrikePlayer(defencePlayer.getPlayer());
 		defencePlayer = new DefencePlayer(temp);
 	}
 
@@ -90,11 +92,17 @@ public class Match {
 		this.players = players;
 	}
 
-	public MatchState getMatchState() {
-		return matchState;
-	}
-
-	public void setMatchState(MatchState matchState) {
-		this.matchState = matchState;
+	private void logScore(Player player1, Player player2) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("Score: [");
+		stringBuilder.append(player1.getName());
+		stringBuilder.append(" -> ");
+		stringBuilder.append(player1.getScore());
+		stringBuilder.append("; ");
+		stringBuilder.append(player2.getName());
+		stringBuilder.append(" -> ");
+		stringBuilder.append(player2.getScore());
+		stringBuilder.append("]");
+		logger.info(stringBuilder.toString());
 	}
 }

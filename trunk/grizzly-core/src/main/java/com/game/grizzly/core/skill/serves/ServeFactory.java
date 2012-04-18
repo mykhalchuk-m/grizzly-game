@@ -14,8 +14,7 @@ public class ServeFactory {
 	}
 	
 	public Skill getSkill(ServeType key) {
-		Skill serve = serves.get(key);
-		return serve;
+		return serves.get(key);
 	}
 
 }
