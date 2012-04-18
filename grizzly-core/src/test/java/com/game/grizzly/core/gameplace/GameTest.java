@@ -7,6 +7,10 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.game.grizzly.core.gameplace.game.Game;
+import com.game.grizzly.core.gameplace.game.GameRules;
+import com.game.grizzly.core.gameplace.player.Player;
+
 public class GameTest {
 	private static Logger logger = Logger.getLogger(MatchTest.class);
 	

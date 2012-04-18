@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.game.grizzly.core.gameplace.player.Player;
+
 public class TestScore {
 	@Test
 	public void testIncScore() {

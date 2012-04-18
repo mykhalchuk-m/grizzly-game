@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import com.game.grizzly.core.gameplace.player.Player;
 import com.game.grizzly.core.skill.Skill;
 import com.game.grizzly.core.skill.defence.DefenceFactory;
 import com.game.grizzly.core.skill.defence.DefenceType;

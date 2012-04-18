@@ -11,6 +11,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.game.grizzly.core.gameplace.match.Match;
+import com.game.grizzly.core.gameplace.match.MatchRules;
+import com.game.grizzly.core.gameplace.player.Player;
+
 public class MatchTest {
 	private static Logger logger = Logger.getLogger(MatchTest.class);
 	private Match match = new Match();
@@ -69,7 +73,7 @@ public class MatchTest {
 
 	@Test
 	public void testParamsPlayMatch() {
-		Rules rules = new Rules();
+		MatchRules rules = new MatchRules();
 		rules.setMaxScore(MAX_SCORE);
 		rules.setServesPerSet(SERVES_PER_SET);
 		List<Player> players = new ArrayList<Player>();

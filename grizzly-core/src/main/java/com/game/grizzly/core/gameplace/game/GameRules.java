@@ -1,6 +1,8 @@
-package com.game.grizzly.core.gameplace;
+package com.game.grizzly.core.gameplace.game;
 
-public class GameRules extends Rules {
+import com.game.grizzly.core.gameplace.match.MatchRules;
+
+public class GameRules extends MatchRules {
 	private int matchCount;
 
 	public int getMatchCount() {

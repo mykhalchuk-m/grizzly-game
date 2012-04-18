@@ -1,7 +1,9 @@
-package com.game.grizzly.core.gameplace;
+package com.game.grizzly.core.gameplace.match;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.game.grizzly.core.gameplace.player.Player;
 
 public class MatchScore {
 	private Map<Player, Integer> score;

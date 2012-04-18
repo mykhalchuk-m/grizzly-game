@@ -1,8 +1,12 @@
-package com.game.grizzly.core.gameplace;
+package com.game.grizzly.core.gameplace.game;
 
 import java.util.List;
 
 import org.apache.log4j.Logger;
+
+import com.game.grizzly.core.gameplace.match.Match;
+import com.game.grizzly.core.gameplace.match.MatchScore;
+import com.game.grizzly.core.gameplace.player.Player;
 
 public class Game {
 	private final Logger logger = Logger.getLogger(getClass());

@@ -1,9 +1,14 @@
-package com.game.grizzly.core.gameplace;
+package com.game.grizzly.core.gameplace.match;
 
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.game.grizzly.core.gameplace.player.AcceptencePlayer;
+import com.game.grizzly.core.gameplace.player.DefencePlayer;
+import com.game.grizzly.core.gameplace.player.Player;
+import com.game.grizzly.core.gameplace.player.ServedPlayer;
+import com.game.grizzly.core.gameplace.player.StrikePlayer;
 import com.game.grizzly.core.skill.serves.ServeType;
 import com.game.grizzly.core.skill.strike.StrikeType;
 
@@ -12,7 +17,7 @@ public class Match {
 	private static final int PUNKTS_PER_GOAL = 1;
 
 	private List<Player> players;
-	private Rules rules;
+	private MatchRules rules;
 
 	private ServedPlayer servedPlayer;
 	private AcceptencePlayer acceptencePlayer;
@@ -93,11 +98,11 @@ public class Match {
 		this.players = players;
 	}
 
-	public Rules getRules() {
+	public MatchRules getRules() {
 		return rules;
 	}
 
-	public void setRules(Rules rules) {
+	public void setRules(MatchRules rules) {
 		this.rules = rules;
 	}
 }
