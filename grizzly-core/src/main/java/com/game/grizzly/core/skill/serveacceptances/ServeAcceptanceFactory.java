@@ -16,7 +16,6 @@ public class ServeAcceptanceFactory {
 	}
 
 	public Skill getSkill(ServeAcceptenceType key) {
-		Skill serveAcceptance = serveAcceptences.get(key);
-		return serveAcceptance;
+		return serveAcceptences.get(key);
 	}
 }

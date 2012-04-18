@@ -10,18 +10,19 @@ import com.game.grizzly.core.skill.strike.StrikeType;
 public class DefencePlayer {
 	private Logger logger = Logger.getLogger(getClass());
 	private Player player;
+	
 	private static Random random = new Random();
 
 	public DefencePlayer(Player player) {
 		this.player = player;
 	}
 
-	public boolean canDefence(int StrikeValue, StrikeType strikeType) {
-		logger.info("Strike defence.");
-		int defenceVaue = player.getDefence(DefenceType.valueOf(strikeType.toString())).doAction();
-		int n = (int) Math.round((defenceVaue * 1.0 / (defenceVaue + StrikeValue)) * 100);
+	public boolean canDefence(double strikeValue, StrikeType strikeType) {
+		logger.info("Strike defending.");
+		double defenceVaue = player.getDefence(DefenceType.valueOf(strikeType.toString())).doAction();
+		double n = defenceVaue / (defenceVaue + strikeValue);
 		logger.info("Strike defence posibility: " + n);
-		if (random.nextInt(100) <= n) {
+		if (random.nextDouble() <= n) {
 			logger.info("Strike defenced.");
 			return true;
 		}

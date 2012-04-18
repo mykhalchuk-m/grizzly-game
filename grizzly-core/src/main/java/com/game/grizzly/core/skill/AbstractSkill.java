@@ -2,19 +2,19 @@ package com.game.grizzly.core.skill;
 
 public abstract class AbstractSkill implements Skill {
 
-	private int value;
+	private double value;
 	
-	public void setSkillValue(int value) {
+	public void setSkillValue(double value) {
 		this.value = value;
 	}
 	
-	public int doAction() {
+	public double doAction() {
 		return value;
 	}
 	
 	@Override
 	public String toString() {
-		return "[" + getClass() + " -> " + value + "]";
+		return "[" + getClass().getSimpleName() + " -> " + value + "]";
 	}
 
 }

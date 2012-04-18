@@ -16,12 +16,12 @@ public class AcceptencePlayer {
 		this.player = player;
 	}
 
-	public boolean canServeAcceptence(int serveValue, ServeType serveType) {
-		logger.info("Serve acceptence.");
-		int accepteValue = player.getServesAcceptence(ServeAcceptenceType.valueOf(serveType.toString())).doAction();
-		int n = (int) Math.round((accepteValue * 1.0 / (accepteValue + serveValue)) * 100);
+	public boolean canServeAcceptence(double serveValue, ServeType serveType) {
+		logger.info("Serve accepting.");
+		double accepteValue = player.getServesAcceptence(ServeAcceptenceType.valueOf(serveType.toString())).doAction();
+		double n = accepteValue / (accepteValue + serveValue);
 		logger.info("Serve acceptence posibility: " + n);
-		if (random.nextInt(100) <= n) {
+		if (random.nextDouble() <= n) {
 			logger.info("Serve accepted.");
 			return true;
 		}
