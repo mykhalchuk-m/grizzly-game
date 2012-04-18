@@ -1,9 +1,9 @@
-package com.game.grizzly.core.gameplace;
+package com.game.grizzly.core.gameplace.match;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-public class Rules {
+public class MatchRules {
 	private int maxScore;
 	private int servesPerSet;
 

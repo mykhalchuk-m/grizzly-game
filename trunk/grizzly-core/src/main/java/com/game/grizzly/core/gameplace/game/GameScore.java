@@ -1,9 +1,12 @@
-package com.game.grizzly.core.gameplace;
+package com.game.grizzly.core.gameplace.game;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import com.game.grizzly.core.gameplace.match.MatchScore;
+import com.game.grizzly.core.gameplace.player.Player;
 
 public class GameScore {
 	private Map<Integer, MatchScore> score;

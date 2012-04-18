@@ -1,4 +1,4 @@
-package com.game.grizzly.core.gameplace;
+package com.game.grizzly.core.gameplace.player;
 
 import java.util.Random;
 
