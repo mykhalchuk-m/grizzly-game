@@ -9,8 +9,6 @@ import com.game.grizzly.core.skill.strike.StrikeType;
 
 public class Match {
 	private Logger logger = Logger.getLogger(getClass());
-	private static final int MAX_SCORE = 11;
-	private static final int SERVES_PER_SET = 2;
 	private static final int PUNKTS_PER_GOAL = 1;
 
 	private List<Player> players;
@@ -26,32 +24,34 @@ public class Match {
 		logger.info("Before initialization.");
 		servedPlayer = new ServedPlayer(players.get(0));
 		acceptencePlayer = new AcceptencePlayer(players.get(1));
-		rules = new Rules();
-		rules.setMaxScore(MAX_SCORE);
-		rules.setServesPerSet(SERVES_PER_SET);
 		logger.info("Match initialized.");
 	}
 
-	public void playMatch() {
-		for (initMatch(); !rules.isFinish(servedPlayer.getPlayer().getScore(), acceptencePlayer.getPlayer().getScore()); swapServes()) {
-			
-			logger.info("Set started. Set has " + rules.getServesPerSet() + " serves.");
+	/**
+	 * Plays match with rules between all players, after returns winner
+	 */
+	public MatchScore playMatch() {
+		MatchScore matchScore = new MatchScore();
+		
+		for (initMatch(); !getRules().isFinish(matchScore.getScore().values()); swapServes()) {
 
-			for (int i = 0; i < rules.getServesPerSet()
-					&& !rules.isFinish(servedPlayer.getPlayer().getScore(), acceptencePlayer.getPlayer().getScore()); i++) {
+			logger.info("Set started. Set has " + getRules().getServesPerSet() + " serves.");
+
+			for (int i = 0; i < getRules().getServesPerSet()
+					&& !getRules().isFinish(matchScore.getScore().values()); i++) {
 				ServeType serveType = servedPlayer.getServeType();
 				double serveValue = servedPlayer.getServe(serveType);
 
 				if (serveValue == 0) {
-					acceptencePlayer.getPlayer().incScore(PUNKTS_PER_GOAL);
-					logScore(servedPlayer.getPlayer(), acceptencePlayer.getPlayer());
+					matchScore.incScore(acceptencePlayer.getPlayer(), PUNKTS_PER_GOAL);
+					logger.info(matchScore);
 					continue;
 				}
 
-				logger.info("Choused serve: " + serveType);
+				logger.info("Selected serve: " + serveType);
 
 				if (!acceptencePlayer.canServeAcceptence(serveValue, serveType)) {
-					servedPlayer.getPlayer().incScore(PUNKTS_PER_GOAL);
+					matchScore.incScore(servedPlayer.getPlayer(), PUNKTS_PER_GOAL);
 				} else {
 					logger.info("--------- game ---------");
 
@@ -60,16 +60,17 @@ public class Match {
 
 					for (boolean goal = false; !goal; swapStrikers()) {
 						StrikeType strikeType = strikePlayer.getStrikeType();
-						logger.info("Choused strike: " + strikeType);
+						logger.info("Selected strike: " + strikeType);
 						if (!defencePlayer.canDefence(strikePlayer.getStrike(strikeType), strikeType)) {
 							goal = true;
-							strikePlayer.getPlayer().incScore(PUNKTS_PER_GOAL);
+							matchScore.incScore(strikePlayer.getPlayer(), PUNKTS_PER_GOAL);
 						}
 					}
 				}
-				logScore(servedPlayer.getPlayer(), acceptencePlayer.getPlayer());
+				logger.info(matchScore);
 			}
 		}
+		return matchScore;
 	}
 
 	private void swapStrikers() {
@@ -92,17 +93,11 @@ public class Match {
 		this.players = players;
 	}
 
-	private void logScore(Player player1, Player player2) {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("Score: [");
-		stringBuilder.append(player1.getName());
-		stringBuilder.append(" -> ");
-		stringBuilder.append(player1.getScore());
-		stringBuilder.append("; ");
-		stringBuilder.append(player2.getName());
-		stringBuilder.append(" -> ");
-		stringBuilder.append(player2.getScore());
-		stringBuilder.append("]");
-		logger.info(stringBuilder.toString());
+	public Rules getRules() {
+		return rules;
+	}
+
+	public void setRules(Rules rules) {
+		this.rules = rules;
 	}
 }

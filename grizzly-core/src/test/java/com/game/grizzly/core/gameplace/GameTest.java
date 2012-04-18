@@ -1,40 +1,22 @@
 package com.game.grizzly.core.gameplace;
 
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class MatchTest {
+public class GameTest {
 	private static Logger logger = Logger.getLogger(MatchTest.class);
-	private Match match = new Match();
-
-	private static int MAX_SCORE = 11;
-	private static int SERVES_PER_SET = 2;
-
+	
 	private Player player1;
 	private Player player2;
-
-	@BeforeClass
-	public static void oneTimeSetUp() {
-		Properties properties = new Properties();
-		try {
-			properties.load(new FileReader(new File("matchConfig.properties")));
-			MAX_SCORE = Integer.parseInt(properties.get("max_score").toString());
-			SERVES_PER_SET = Integer.parseInt(properties.get("serves_per_set").toString());
-		} catch (Exception e) {
-			logger.warn("Config file didt't find, default values were loaded");
-		}
-	}
+	private Game game = new Game();
+	private GameRules gameRules = new GameRules();
 	
 	@Before
-	public void initPlayMatch() {
+	public void init() {
 		SkillsGenerator skillsGenerator = new SkillsGenerator();
 
 		player1 = new Player();
@@ -59,23 +41,15 @@ public class MatchTest {
 		players.add(player1);
 		players.add(player2);
 
-		match.setPlayers(players);
+		game.setPlayers(players);
 	}
-
-	// @Test
-	public void testPlayMatch() {
-		match.playMatch();
-	}
-
+	
 	@Test
-	public void testParamsPlayMatch() {
-		Rules rules = new Rules();
-		rules.setMaxScore(MAX_SCORE);
-		rules.setServesPerSet(SERVES_PER_SET);
-		List<Player> players = new ArrayList<Player>();
-		players.add(player1);
-		players.add(player2);
-		match.setPlayers(players);
-		match.setRules(rules);
+	public void testPlayGame() {
+		gameRules.setMatchCount(5);
+		gameRules.setMaxScore(11);
+		gameRules.setServesPerSet(2);
+		game.setGameRules(gameRules);
+		game.playGame();
 	}
 }
