@@ -12,7 +12,6 @@ import com.game.grizzly.core.skill.strike.StrikeType;
 
 public class Player {
 	private String name;
-	private int score;
 	private Map<ServeType, Skill> serves = new HashMap<ServeType, Skill>();
 	private Map<ServeAcceptenceType, Skill> servesAcceptence = new HashMap<ServeAcceptenceType, Skill>();
 	private Map<PasiveSkillType, Skill> pasives = new HashMap<PasiveSkillType, Skill>();
@@ -62,25 +61,13 @@ public class Player {
 	public Skill getPasiveSkill(PasiveSkillType pasiveSkillType) {
 		return pasives.get(pasiveSkillType);
 	}
-	
+
 	public Skill getStrike(StrikeType strikeType) {
 		return strikes.get(strikeType);
 	}
-	
+
 	public Skill getDefence(DefenceType defenceType) {
 		return defences.get(defenceType);
-	}
-
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
-	public void incScore(int incValue) {
-		score += incValue;
 	}
 
 	public Map<StrikeType, Skill> getStrikes() {
@@ -100,10 +87,39 @@ public class Player {
 	}
 
 	@Override
-	public String toString() {
-		return "Player [name=" + name + ", score=" + score + ", serves=" + serves + ", servesAcceptence="
-				+ servesAcceptence + ", pasives=" + pasives + ", strikes=" + strikes + ", defences=" + defences + "]";
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
 	}
-	
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Player other = (Player) obj;
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Player [name=" + name + ", serves=" + serves + ", servesAcceptence=" + servesAcceptence + ", pasives="
+				+ pasives + ", strikes=" + strikes + ", defences=" + defences + "]";
+	}
+
 }

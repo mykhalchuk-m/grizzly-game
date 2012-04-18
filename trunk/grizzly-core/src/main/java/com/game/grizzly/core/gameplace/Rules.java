@@ -1,15 +1,16 @@
 package com.game.grizzly.core.gameplace;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 public class Rules {
 	private int maxScore;
 	private int servesPerSet;
 
-	public boolean isFinish(int... scores) {
+	public boolean isFinish(Collection<Integer> scores) {
 		for (Integer count : scores) {
 			if (count >= maxScore) {
-				int[] temp = scores.clone();
+				Integer[] temp = scores.toArray(new Integer[0]);
 				Arrays.sort(temp);
 				if ((temp[1] - temp[0]) > 1) {
 					return true;
