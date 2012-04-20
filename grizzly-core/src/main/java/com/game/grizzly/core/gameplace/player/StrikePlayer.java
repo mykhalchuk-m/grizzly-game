@@ -39,9 +39,9 @@ public class StrikePlayer {
 	}
 	
 	private void decStamina(double decValue) {
-		logger.info("Stamina decreased by " + decValue);
 		double staminaValue = player.getPasiveSkill(PasiveSkillType.STAMINA).doAction();
 		staminaValue -= decValue;
+		logger.info(player.getName() + " stamina currently is -> " + staminaValue);
 		player.getPasiveSkill(PasiveSkillType.STAMINA).setSkillValue(staminaValue);
 	}
 }

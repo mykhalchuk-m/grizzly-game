@@ -1,7 +1,6 @@
 package com.game.grizzly.core.gameplace;
 
-import java.io.File;
-import java.io.FileReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -29,7 +28,8 @@ public class MatchTest {
 	public static void oneTimeSetUp() {
 		Properties properties = new Properties();
 		try {
-			properties.load(new FileReader(new File("matchConfig.properties")));
+			InputStream in = MatchTest.class.getClassLoader().getResourceAsStream("matchConfig.properties");
+			properties.load(in);
 			MAX_SCORE = Integer.parseInt(properties.get("max_score").toString());
 			SERVES_PER_SET = Integer.parseInt(properties.get("serves_per_set").toString());
 		} catch (Exception e) {
@@ -66,11 +66,6 @@ public class MatchTest {
 		match.setPlayers(players);
 	}
 
-	// @Test
-	public void testPlayMatch() {
-		match.playMatch();
-	}
-
 	@Test
 	public void testParamsPlayMatch() {
 		MatchRules rules = new MatchRules();
@@ -81,5 +76,6 @@ public class MatchTest {
 		players.add(player2);
 		match.setPlayers(players);
 		match.setRules(rules);
+		match.playMatch();
 	}
 }

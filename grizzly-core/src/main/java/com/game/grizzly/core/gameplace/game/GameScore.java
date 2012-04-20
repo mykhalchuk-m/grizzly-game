@@ -1,9 +1,8 @@
 package com.game.grizzly.core.gameplace.game;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+import java.util.Map.Entry;
 
 import com.game.grizzly.core.gameplace.match.MatchScore;
 import com.game.grizzly.core.gameplace.player.Player;
@@ -34,12 +33,9 @@ public class GameScore {
 	
 	public Player getWinner() {
 		Map<Player, Integer> map = new HashMap<Player, Integer>();
-		Set<Player> winners = new HashSet<Player>();
-		for (Integer i : score.keySet()) {
-			winners.add(score.get(i).getWinner());
-		}
 		
-		for (Player player : winners) {
+		for (MatchScore matchScore : score.values()) {
+			Player player = matchScore.getWinner();
 			if (!map.containsKey(player)) {
 				map.put(player, 1);
 			} else {
@@ -47,10 +43,12 @@ public class GameScore {
 			}
 		}
 		
-		Player winner = winners.iterator().next();
-		for (Player player : map.keySet()) {
-			if (map.get(winner) < map.get(player)) {
-				winner = player;
+		Entry<Player, Integer> winnerEntry = map.entrySet().iterator().next(); 
+		Player winner = winnerEntry.getKey();
+		int winnerPoints = winnerEntry.getValue();
+		for(Entry<Player, Integer> entry: map.entrySet()) {
+			if (entry.getValue() > winnerPoints) {
+				winner = entry.getKey();
 			}
 		}
 		
