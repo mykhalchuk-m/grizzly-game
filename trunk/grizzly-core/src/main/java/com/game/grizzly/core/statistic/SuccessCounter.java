@@ -1,18 +1,25 @@
 package com.game.grizzly.core.statistic;
 
-import com.game.grizzly.core.skill.serves.ServeType;
-import com.game.grizzly.core.skill.strike.StrikeType;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SuccessCounter {
-	int success;
-	int unsuccess;
-	int ace;
-	
-	void incCounter(ServeType serveType, SuccessType successType) {
-		
+	private Map<SuccessType, Integer> counter;
+
+	public SuccessCounter() {
+		counter = new HashMap<SuccessType, Integer>();
+		for (SuccessType successType : SuccessType.values()) {
+			counter.put(successType, 0);
+		}
+	}
+
+	void incCounter(SuccessType successType) {
+		counter.put(successType, counter.get(successType));
 	}
 	
-	void incCounter(StrikeType strikeType, SuccessType successType) {
-		
+	@Override
+	public String toString() {
+		return counter.toString();
 	}
+
 }

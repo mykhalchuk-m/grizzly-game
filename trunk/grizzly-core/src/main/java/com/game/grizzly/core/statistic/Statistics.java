@@ -14,7 +14,7 @@ public class Statistics {
 		if (null == successCounter) {
 			successCounter = new SuccessCounter();
 		}
-		successCounter.incCounter(serveType, successType);
+		successCounter.incCounter(successType);
 		successServes.put(serveType, successCounter);
 	}
 
@@ -23,7 +23,15 @@ public class Statistics {
 		if (null == successCounter) {
 			successCounter = new SuccessCounter();
 		}
-		successCounter.incCounter(strikeType, successType);
+		successCounter.incCounter(successType);
 		successStrikes.put(strikeType, successCounter);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(successServes);
+		builder.append(successStrikes);
+		return builder.toString();
 	}
 }
