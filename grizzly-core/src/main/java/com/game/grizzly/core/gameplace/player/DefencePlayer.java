@@ -18,10 +18,9 @@ public class DefencePlayer {
 	}
 
 	public boolean canDefence(double strikeValue, StrikeType strikeType) {
-		logger.info("Strike defending.");
 		double defenceVaue = player.getDefence(DefenceType.valueOf(strikeType.toString())).doAction();
 		double n = defenceVaue / (defenceVaue + strikeValue);
-		logger.info("Strike defence posibility: " + n);
+		logger.info(player.getName() + " can defence the strike with posibility: " + n);
 		if (random.nextDouble() <= n) {
 			logger.info("Strike defenced.");
 			return true;

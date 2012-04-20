@@ -1,4 +1,4 @@
-package com.game.grizzly.core.gameplace;
+package com.game.grizzly.core.gameplace.utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +18,16 @@ import com.game.grizzly.core.skill.strike.StrikeFactory;
 import com.game.grizzly.core.skill.strike.StrikeType;
 
 public class SkillsGenerator {
+	
+	private double level = 3;
+	
+	public SkillsGenerator() {
+	}
+	
+	public SkillsGenerator(double level) {
+		this.level = level;
+	}
+	
 	private Random random = new Random();
 
 	public Player getnerateServes(Player player) {
@@ -25,7 +35,7 @@ public class SkillsGenerator {
 		Map<ServeType, Skill> map = new HashMap<ServeType, Skill>();
 		for (ServeType serveType : ServeType.values()) {
 			Skill skill = serveFactory.getSkill(serveType);
-			skill.setSkillValue(random.nextDouble());
+			skill.setSkillValue(level / 10 + random.nextDouble() / 10);
 			map.put(serveType, skill);
 		}
 		player.setServes(map);
@@ -37,7 +47,7 @@ public class SkillsGenerator {
 		Map<ServeAcceptenceType, Skill> map = new HashMap<ServeAcceptenceType, Skill>();
 		for (ServeAcceptenceType acceptenceType : ServeAcceptenceType.values()) {
 			Skill skill = acceptanceFactory.getSkill(acceptenceType);
-			skill.setSkillValue(random.nextDouble());
+			skill.setSkillValue(level / 10 + random.nextDouble() / 10);
 			map.put(acceptenceType, skill);
 		}
 		player.setServesAcceptence(map);
@@ -48,10 +58,10 @@ public class SkillsGenerator {
 		PasiveSkillFactory pasiveSkillFactory = new PasiveSkillFactory();
 		Map<PasiveSkillType, Skill> map = new HashMap<PasiveSkillType, Skill>();
 		Skill skill = pasiveSkillFactory.getSkill(PasiveSkillType.STAMINA);
-		skill.setSkillValue(0.9);
+		skill.setSkillValue(0.9 + random.nextDouble() / 10);
 		map.put(PasiveSkillType.STAMINA, skill);
 		skill = pasiveSkillFactory.getSkill(PasiveSkillType.CRYTICAL_STRICE);
-		skill.setSkillValue(0.07);
+		skill.setSkillValue(random.nextDouble() / 10);
 		map.put(PasiveSkillType.CRYTICAL_STRICE, skill);
 		skill = pasiveSkillFactory.getSkill(PasiveSkillType.REACTION);
 		skill.setSkillValue(0.005);
@@ -64,7 +74,7 @@ public class SkillsGenerator {
 		Map<StrikeType, Skill> map = new HashMap<StrikeType, Skill>();
 		for (StrikeType key : StrikeType.values()) {
 			Skill skill = strikeFactory.getSkill(key);
-			skill.setSkillValue(random.nextDouble());
+			skill.setSkillValue(level / 10 + random.nextDouble() / 10);
 			map.put(key, skill);
 		}
 		player.setStrikes(map);
@@ -76,10 +86,14 @@ public class SkillsGenerator {
 		Map<DefenceType, Skill> map = new HashMap<DefenceType, Skill>();
 		for (DefenceType defenceType : DefenceType.values()) {
 			Skill skill = defenceFactory.getSkill(defenceType);
-			skill.setSkillValue(random.nextDouble());
+			skill.setSkillValue(level / 10 + random.nextDouble() / 10);
 			map.put(defenceType, skill);
 		}
 		player.setDefences(map);
 		return player;
+	}
+	
+	public void setLevel(double level) {
+		this.level = level;
 	}
 }

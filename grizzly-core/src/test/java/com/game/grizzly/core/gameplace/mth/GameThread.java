@@ -3,7 +3,7 @@ package com.game.grizzly.core.gameplace.mth;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.game.grizzly.core.gameplace.SkillsGenerator;
+import com.game.grizzly.core.gameplace.utils.SkillsGenerator;
 import com.game.grizzly.core.gameplace.game.Game;
 import com.game.grizzly.core.gameplace.game.GameRules;
 import com.game.grizzly.core.gameplace.player.Player;

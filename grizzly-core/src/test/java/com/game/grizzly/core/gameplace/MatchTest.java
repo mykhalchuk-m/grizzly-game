@@ -13,6 +13,7 @@ import org.junit.Test;
 import com.game.grizzly.core.gameplace.match.Match;
 import com.game.grizzly.core.gameplace.match.MatchRules;
 import com.game.grizzly.core.gameplace.player.Player;
+import com.game.grizzly.core.gameplace.utils.SkillsGenerator;
 
 public class MatchTest {
 	private static Logger logger = Logger.getLogger(MatchTest.class);
@@ -50,6 +51,7 @@ public class MatchTest {
 		player1 = skillsGenerator.generateDefences(player1);
 		logger.info(player1);
 
+		skillsGenerator.setLevel(9);
 		player2 = new Player();
 		player2.setName("player2");
 		player2 = skillsGenerator.getnerateServes(player2);
