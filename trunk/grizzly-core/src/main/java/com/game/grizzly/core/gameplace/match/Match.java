@@ -45,15 +45,14 @@ public class Match {
 			for (int i = 0; i < getRules().getServesPerSet()
 					&& !getRules().isFinish(matchScore.getScore().values()); i++) {
 				ServeType serveType = servedPlayer.getServeType();
+				logger.info(servedPlayer.getPlayer().getName() + " serves with " + serveType);
+				
 				double serveValue = servedPlayer.getServe(serveType);
-
 				if (serveValue == 0) {
 					matchScore.incScore(acceptencePlayer.getPlayer(), PUNKTS_PER_GOAL);
 					logger.info(matchScore);
 					continue;
 				}
-
-				logger.info("Selected serve: " + serveType);
 
 				if (!acceptencePlayer.canServeAcceptence(serveValue, serveType)) {
 					matchScore.incScore(servedPlayer.getPlayer(), PUNKTS_PER_GOAL);
@@ -65,12 +64,13 @@ public class Match {
 
 					for (boolean goal = false; !goal; swapStrikers()) {
 						StrikeType strikeType = strikePlayer.getStrikeType();
-						logger.info("Selected strike: " + strikeType);
+						logger.info(strikePlayer.getPlayer().getName() + " striks with " + strikeType);
 						if (!defencePlayer.canDefence(strikePlayer.getStrike(strikeType), strikeType)) {
 							goal = true;
 							matchScore.incScore(strikePlayer.getPlayer(), PUNKTS_PER_GOAL);
 						}
 					}
+					logger.info("------- end game -------");
 				}
 				logger.info(matchScore);
 			}

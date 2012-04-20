@@ -17,10 +17,9 @@ public class AcceptencePlayer {
 	}
 
 	public boolean canServeAcceptence(double serveValue, ServeType serveType) {
-		logger.info("Serve accepting.");
 		double accepteValue = player.getServesAcceptence(ServeAcceptenceType.valueOf(serveType.toString())).doAction();
 		double n = accepteValue / (accepteValue + serveValue);
-		logger.info("Serve acceptence posibility: " + n);
+		logger.info(player.getName() + " can accepte the serve with posibility: " + n);
 		if (random.nextDouble() <= n) {
 			logger.info("Serve accepted.");
 			return true;
