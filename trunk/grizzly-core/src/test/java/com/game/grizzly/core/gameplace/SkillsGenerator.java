@@ -53,6 +53,8 @@ public class SkillsGenerator {
 		skill = pasiveSkillFactory.getSkill(PasiveSkillType.CRYTICAL_STRICE);
 		skill.setSkillValue(0.07);
 		map.put(PasiveSkillType.CRYTICAL_STRICE, skill);
+		skill = pasiveSkillFactory.getSkill(PasiveSkillType.REACTION);
+		skill.setSkillValue(0.005);
 		player.setPasives(map);
 		return player;
 	}
