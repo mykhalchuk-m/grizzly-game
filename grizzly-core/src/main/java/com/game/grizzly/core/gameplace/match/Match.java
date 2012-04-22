@@ -11,6 +11,7 @@ import com.game.grizzly.core.gameplace.player.ServedPlayer;
 import com.game.grizzly.core.gameplace.player.StrikePlayer;
 import com.game.grizzly.core.skill.serves.ServeType;
 import com.game.grizzly.core.skill.strike.StrikeType;
+import com.game.grizzly.core.statistic.SuccessType;
 
 public class Match {
 	private Logger logger = Logger.getLogger(getClass());
@@ -50,8 +51,11 @@ public class Match {
 				double serveValue = servedPlayer.getServe(serveType);
 				if (serveValue == 0) {
 					matchScore.incScore(acceptencePlayer.getPlayer(), PUNKTS_PER_GOAL);
+					servedPlayer.getPlayer().getStatistics().registerServeAs(serveType, SuccessType.UNSUCCESS);
 					logger.info(matchScore);
 					continue;
+				} else {
+					servedPlayer.getPlayer().getStatistics().registerServeAs(serveType, SuccessType.SUCCESS);
 				}
 
 				if (!acceptencePlayer.canServeAcceptence(serveValue, serveType)) {
