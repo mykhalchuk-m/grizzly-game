@@ -79,5 +79,10 @@ public class MatchTest {
 		match.setPlayers(players);
 		match.setRules(rules);
 		match.playMatch();
+		for (Player player : match.getPlayers()) {
+			logger.info(player.getName());
+			logger.info(match.getStatistics().getStatistic(player));
+			logger.info(match.getStatistics().getServeStatistic(player));
+		}
 	}
 }

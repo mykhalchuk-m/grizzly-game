@@ -28,7 +28,7 @@ public class MatchScore {
 			score.put(player, curentValue + incValue);
 		}
 	}
-	
+		
 	public Player getWinner() {
 		Player winner = score.keySet().iterator().next();
 		for (Player player : score.keySet()) {
