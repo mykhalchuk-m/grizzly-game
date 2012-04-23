@@ -11,7 +11,8 @@ import com.game.grizzly.core.gameplace.player.ServedPlayer;
 import com.game.grizzly.core.gameplace.player.StrikePlayer;
 import com.game.grizzly.core.skill.serves.ServeType;
 import com.game.grizzly.core.skill.strike.StrikeType;
-import com.game.grizzly.core.statistic.SuccessType;
+import com.game.grizzly.core.statistic.Statistics;
+import com.game.grizzly.core.statistic.TargetType;
 
 public class Match {
 	private Logger logger = Logger.getLogger(getClass());
@@ -26,10 +27,13 @@ public class Match {
 	private StrikePlayer strikePlayer;
 	private DefencePlayer defencePlayer;
 
+	private Statistics statistics;
+	
 	private void initMatch() {
 		logger.info("Before initialization.");
 		servedPlayer = new ServedPlayer(players.get(0));
 		acceptencePlayer = new AcceptencePlayer(players.get(1));
+		statistics = new Statistics();
 		logger.info("Match initialized.");
 	}
 
@@ -51,27 +55,29 @@ public class Match {
 				double serveValue = servedPlayer.getServe(serveType);
 				if (serveValue == 0) {
 					matchScore.incScore(acceptencePlayer.getPlayer(), PUNKTS_PER_GOAL);
-					servedPlayer.getPlayer().getStatistics().registerServeAs(serveType, SuccessType.UNSUCCESS);
+					statistics.registerEvent(acceptencePlayer.getPlayer(), TargetType.OPONENT_SERVE_FALLS);
 					logger.info(matchScore);
 					continue;
-				} else {
-					servedPlayer.getPlayer().getStatistics().registerServeAs(serveType, SuccessType.SUCCESS);
 				}
 
 				if (!acceptencePlayer.canServeAcceptence(serveValue, serveType)) {
 					matchScore.incScore(servedPlayer.getPlayer(), PUNKTS_PER_GOAL);
+					statistics.registerEvent(servedPlayer.getPlayer(), TargetType.SERVE);
+					statistics.registerServe(servedPlayer.getPlayer(), serveType, true);
 				} else {
 					logger.info("--------- game ---------");
-
+					statistics.registerServe(servedPlayer.getPlayer(), serveType, false);
+					
 					strikePlayer = new StrikePlayer(acceptencePlayer.getPlayer());
 					defencePlayer = new DefencePlayer(servedPlayer.getPlayer());
-
+					
 					for (boolean goal = false; !goal; swapStrikers()) {
 						StrikeType strikeType = strikePlayer.getStrikeType();
 						logger.info(strikePlayer.getPlayer().getName() + " striks with " + strikeType);
 						if (!defencePlayer.canDefence(strikePlayer.getStrike(strikeType), strikeType)) {
 							goal = true;
 							matchScore.incScore(strikePlayer.getPlayer(), PUNKTS_PER_GOAL);
+							statistics.registerEvent(strikePlayer.getPlayer(), TargetType.STIKE);
 						}
 					}
 					logger.info("------- end game -------");
@@ -108,5 +114,9 @@ public class Match {
 
 	public void setRules(MatchRules rules) {
 		this.rules = rules;
+	}
+	
+	public Statistics getStatistics() {
+		return statistics;
 	}
 }

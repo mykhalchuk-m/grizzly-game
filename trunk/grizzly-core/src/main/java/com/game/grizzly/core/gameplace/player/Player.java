@@ -9,7 +9,6 @@ import com.game.grizzly.core.skill.passive.PasiveSkillType;
 import com.game.grizzly.core.skill.serveacceptances.ServeAcceptenceType;
 import com.game.grizzly.core.skill.serves.ServeType;
 import com.game.grizzly.core.skill.strike.StrikeType;
-import com.game.grizzly.core.statistic.Statistics;
 
 public class Player {
 	private String name;
@@ -18,7 +17,6 @@ public class Player {
 	private Map<PasiveSkillType, Skill> pasives = new HashMap<PasiveSkillType, Skill>();
 	private Map<StrikeType, Skill> strikes = new HashMap<StrikeType, Skill>();
 	private Map<DefenceType, Skill> defences = new HashMap<DefenceType, Skill>();
-	private Statistics statistics = new Statistics();
 
 	public String getName() {
 		return name;
@@ -123,13 +121,4 @@ public class Player {
 		return "Player [name=" + name + ", serves=" + serves + ", servesAcceptence=" + servesAcceptence + ", pasives="
 				+ pasives + ", strikes=" + strikes + ", defences=" + defences + "]";
 	}
-
-	public Statistics getStatistics() {
-		return statistics;
-	}
-
-	public void setStatistics(Statistics statistics) {
-		this.statistics = statistics;
-	}
-
 }
