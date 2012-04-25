@@ -17,8 +17,12 @@ public class ServedPlayer {
 		this.player = player;
 	}
 
-	public ServeType getServeType() {
-		return ServeType.values()[random.nextInt(ServeType.values().length)];
+	public ServeType getServeType(int serveNumber) {
+		ServeType serveType = player.getPlayerSettings().getServeByOrder(serveNumber);
+		if (null == serveType) {
+			serveType = ServeType.values()[random.nextInt(ServeType.values().length)];
+		}
+		return serveType;
 	}
 
 	/**
