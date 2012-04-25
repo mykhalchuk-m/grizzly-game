@@ -20,7 +20,11 @@ public class StrikePlayer {
 	}
 
 	public StrikeType getStrikeType() {
-		return StrikeType.values()[random.nextInt(StrikeType.values().length)];
+		StrikeType strikeType = player.getPlayerSettings().getStrikeType();
+		if (null == strikeType) {
+			strikeType = StrikeType.values()[random.nextInt(StrikeType.values().length)];
+		}
+		return strikeType;
 	}
 
 	public double getStrike(StrikeType strikeType) {

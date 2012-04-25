@@ -28,7 +28,7 @@ public class Match {
 	private DefencePlayer defencePlayer;
 
 	private Statistics statistics;
-	
+
 	private void initMatch() {
 		logger.info("Before initialization.");
 		servedPlayer = new ServedPlayer(players.get(0));
@@ -42,16 +42,16 @@ public class Match {
 	 */
 	public MatchScore playMatch() {
 		MatchScore matchScore = new MatchScore();
-		
+
 		for (initMatch(); !getRules().isFinish(matchScore.getScore().values()); swapServes()) {
 
 			logger.info("Set started. Set has " + getRules().getServesPerSet() + " serves.");
 
-			for (int i = 0; i < getRules().getServesPerSet()
-					&& !getRules().isFinish(matchScore.getScore().values()); i++) {
-				ServeType serveType = servedPlayer.getServeType();
+			for (int i = 0; i < getRules().getServesPerSet() && !getRules().isFinish(matchScore.getScore().values()); i++) {
+				ServeType serveType = servedPlayer.getServeType(i);
+
 				logger.info(servedPlayer.getPlayer().getName() + " serves with " + serveType);
-				
+
 				double serveValue = servedPlayer.getServe(serveType);
 				if (serveValue == 0) {
 					matchScore.incScore(acceptencePlayer.getPlayer(), PUNKTS_PER_GOAL);
@@ -67,18 +67,20 @@ public class Match {
 				} else {
 					logger.info("--------- game ---------");
 					statistics.registerServe(servedPlayer.getPlayer(), serveType, false);
-					
+
 					strikePlayer = new StrikePlayer(acceptencePlayer.getPlayer());
 					defencePlayer = new DefencePlayer(servedPlayer.getPlayer());
-					
+
 					for (boolean goal = false; !goal; swapStrikers()) {
 						StrikeType strikeType = strikePlayer.getStrikeType();
 						logger.info(strikePlayer.getPlayer().getName() + " striks with " + strikeType);
+
 						if (!defencePlayer.canDefence(strikePlayer.getStrike(strikeType), strikeType)) {
 							goal = true;
 							matchScore.incScore(strikePlayer.getPlayer(), PUNKTS_PER_GOAL);
 							statistics.registerEvent(strikePlayer.getPlayer(), TargetType.STIKE);
 						}
+						statistics.registerStrike(strikePlayer.getPlayer(), strikeType, goal);
 					}
 					logger.info("------- end game -------");
 				}
@@ -115,7 +117,7 @@ public class Match {
 	public void setRules(MatchRules rules) {
 		this.rules = rules;
 	}
-	
+
 	public Statistics getStatistics() {
 		return statistics;
 	}

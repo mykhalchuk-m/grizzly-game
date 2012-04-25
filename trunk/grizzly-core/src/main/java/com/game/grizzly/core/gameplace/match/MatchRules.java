@@ -10,6 +10,9 @@ public class MatchRules {
 	public boolean isFinish(Collection<Integer> scores) {
 		for (Integer count : scores) {
 			if (count >= maxScore) {
+				if (scores.size() == 1) {
+					return true;
+				}
 				Integer[] temp = scores.toArray(new Integer[0]);
 				Arrays.sort(temp);
 				if ((temp[1] - temp[0]) > 1) {

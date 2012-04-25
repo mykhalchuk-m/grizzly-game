@@ -17,6 +17,7 @@ public class Player {
 	private Map<PasiveSkillType, Skill> pasives = new HashMap<PasiveSkillType, Skill>();
 	private Map<StrikeType, Skill> strikes = new HashMap<StrikeType, Skill>();
 	private Map<DefenceType, Skill> defences = new HashMap<DefenceType, Skill>();
+	private PlayerSettings playerSettings = new PlayerSettings();
 
 	public String getName() {
 		return name;
@@ -120,5 +121,13 @@ public class Player {
 	public String toString() {
 		return "Player [name=" + name + ", serves=" + serves + ", servesAcceptence=" + servesAcceptence + ", pasives="
 				+ pasives + ", strikes=" + strikes + ", defences=" + defences + "]";
+	}
+
+	public PlayerSettings getPlayerSettings() {
+		return playerSettings;
+	}
+
+	public void setPlayerSettings(PlayerSettings playerSettings) {
+		this.playerSettings = playerSettings;
 	}
 }

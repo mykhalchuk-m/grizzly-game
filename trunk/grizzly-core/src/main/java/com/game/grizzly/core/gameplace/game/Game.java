@@ -22,16 +22,19 @@ public class Game {
 	
 	public void playGame() {
 		Match match = new Match();
-		match.setPlayers(getPlayers());
-		match.setRules(getGameRules());
+		match.setPlayers(players);
+		match.setRules(gameRules);
 		for (int i = 0; i < gameRules.getMatchCount(); i++) {
 			logger.info("============= match " + (i+1) + " ===========");
 			MatchScore matchScore = match.playMatch();
+			logger.info(match.getStatistics());
 			gameScore.addMatchScore(matchScore, i);
 		}
 		logger.info(gameScore);
 		logger.info("Game winner: " + gameScore.getWinner().getName());
 	}
+	
+	
 
 	public List<Match> getMatchs() {
 		return matchs;
