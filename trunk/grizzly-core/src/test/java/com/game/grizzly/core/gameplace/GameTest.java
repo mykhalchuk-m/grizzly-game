@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.game.grizzly.core.gameplace.game.Game;
@@ -60,6 +61,7 @@ public class GameTest {
 		game.setPlayers(players);
 	}
 	
+	@Ignore
 	@Test
 	public void testPlayGame() {
 		gameRules.setMatchCount(5);
